@@ -38,13 +38,13 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <path>/tilepuzzle</path>
+                    <path>/knight</path>
                     <update>true</update>
                     <username>tomcat</username>
                     <password>tomcat321</password>
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>tilepuzzle</finalName>
+        <finalName>knight</finalName>
     </build>
 </project>
