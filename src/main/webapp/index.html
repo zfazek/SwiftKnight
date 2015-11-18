@@ -12,25 +12,46 @@
         <title>Swift Knight</title>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
-        </script>
-    </head>
-    <body>
-        <h1>Milyen gyors a huszár?</h1>
-        <br>
-        <br>
-        <div id="input">
-            <table>
-                <tr>
-                    <td>Melyik mezőről indul a huszár?</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Melyik mezőre érkezik a huszár?</td>
-                    <td></td>
-                </tr>
-            </table>
-        <br>
-        <br>
-        <div id="result"></div>
+
+        function submitFunction(move) {
+            $.post('moves', {
+                    from: $('#from_field').val(),
+                    to: $('#to_field').val()
+            }, function(data) {
+                $('#result').text(data);
+            });
+        }
+
+        function readyFunction() {
+
+            $('#submit').click(function() {
+                submitFunction();
+            });
+        }
+
+        $(document).ready(readyFunction);
+    </script>
+</head>
+<body>
+    <h1>How fast is a knight in a chess board?</h1>
+    <br>
+    <br>
+    <div id="input">
+        <table>
+            <tr>
+                <td align="right">From field:</td>
+                <td><input type="text" id="from_field"></td>
+            </tr>
+            <tr>
+                <td align="right">To field:</td>
+                <td><input type="text" id="to_field"></td>
+            </tr>
+            <tr>
+                <td align="right"><button id="submit">Calculate</button></td>
+            </tr>
+            <tr>
+                <td><div id="result">Result:</div></td>
+            </tr>
+        </table>
     </body>
 </html>

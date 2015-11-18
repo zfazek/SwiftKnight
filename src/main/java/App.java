@@ -1,9 +1,5 @@
 package com.ongroa.knight;
 
-/**
- * Hello world!
- *
- */
 public class App {
 
     int[] new_table =    {
