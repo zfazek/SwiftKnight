@@ -5,38 +5,37 @@
             text-align: center;
         }
         #result {
-            text-align: center;
+            text-align: left;
         }
     </style>
     <head>
         <title>Swift Knight</title>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
+            var result_prefix = "Result: ";
 
-        function submitFunction(move) {
-            $.post('moves', {
-                    from: $('#from_field').val(),
-                    to: $('#to_field').val()
-            }, function(data) {
-                $('#result').text(data);
-            });
-        }
+            function submitFunction(move) {
+                $.post('moves', {
+                        from: $('#from_field').val(),
+                        to: $('#to_field').val()
+                }, function(data) {
+                    $('#result').text(result_prefix + data);
+                });
+            }
 
-        function readyFunction() {
+            function readyFunction() {
+                $('#submit').click(function() {
+                    submitFunction();
+                });
+            }
 
-            $('#submit').click(function() {
-                submitFunction();
-            });
-        }
-
-        $(document).ready(readyFunction);
-    </script>
-</head>
-<body>
-    <h1>How fast is a knight in a chess board?</h1>
-    <br>
-    <br>
-    <div id="input">
+            $(document).ready(readyFunction);
+        </script>
+    </head>
+    <body>
+        <h1>How fast is a knight in a chess board?</h1>
+        <br>
+        <br>
         <table>
             <tr>
                 <td align="right">From field:</td>
@@ -49,9 +48,8 @@
             <tr>
                 <td align="right"><button id="submit">Calculate</button></td>
             </tr>
-            <tr>
-                <td><div id="result">Result:</div></td>
-            </tr>
         </table>
+        <br>
+        <div id="result">Result:</div>
     </body>
 </html>
