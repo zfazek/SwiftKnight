@@ -24,12 +24,12 @@ int main(int argc, char **argv) {
         form_iterator p_to = cgi.getElement("to");
         if (p_from != cgi.getElements().end() &&
                 p_to != cgi.getElements().end()) {
-            from_field == **p_from;
-            to_field == **p_to;
+            from_field = cgi("from");
+            to_field = cgi("to");
         }
     }
     from_pos = table.getPosition(from_field);
     to_pos = table.getPosition(to_field);
     cout << from_field << " - " << to_field << endl;
-    cout << from_pos << " - " << to_pos << endl;
+    // cout << "#" << from_pos << " - " << to_pos << endl;
 }
