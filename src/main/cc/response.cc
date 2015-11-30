@@ -28,8 +28,11 @@ int main(int argc, char **argv) {
             to_field = cgi("to");
         }
     }
+    if (from_field == to_field) {
+        cout << from_field << " - " << to_field << endl;
+        return 0;
+    }
     from_pos = table.getPosition(from_field);
     to_pos = table.getPosition(to_field);
     cout << from_field << " - " << to_field << endl;
-    // cout << "#" << from_pos << " - " << to_pos << endl;
 }

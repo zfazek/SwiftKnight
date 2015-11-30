@@ -21,6 +21,8 @@ class Table {
 
     int table[120];
 
+    int dir_knight[8] = { -21, -19, -12,  -8,  8, 12, 19, 21 };
+
     void init();
 
     public:
