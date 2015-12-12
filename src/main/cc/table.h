@@ -1,6 +1,10 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
+typedef std::vector<int> Path;
+typedef std::vector<Path> Paths;
 
 class Table {
 
@@ -19,15 +23,27 @@ class Table {
         0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff
     };
 
+    size_t number_of_moves;
     int table[120];
+    std::vector<int> dir_knight = { -21, -19, -12,  -8,  8, 12, 19, 21 };
 
-    int dir_knight[8] = { -21, -19, -12,  -8,  8, 12, 19, 21 };
+    std::vector<int> current_path;
 
     void init();
+    void move();
+    void search(const int pos, Path current_path);
 
     public:
     Table();
     ~Table();
     std::string getCoordinate(int pos) const;
     int getPosition(std::string coord) const;
+    std::string getPath(Path path) const;
+    std::string getShortestPaths() const;
+    void find();
+
+    int from_pos;
+    int to_pos;
+    Paths shortest_paths;
+
 };

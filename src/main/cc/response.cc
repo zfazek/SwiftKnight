@@ -11,9 +11,6 @@ using namespace cgicc;
 int main(int argc, char **argv) {
     string from_field;
     string to_field;
-    int from_pos;
-    int to_pos;
-    Table table;
     if (argc == 3) {
         from_field = argv[1];
         to_field = argv[2];
@@ -28,11 +25,16 @@ int main(int argc, char **argv) {
             to_field = cgi("to");
         }
     }
+
     if (from_field == to_field) {
         cout << from_field << " - " << to_field << endl;
         return 0;
     }
-    from_pos = table.getPosition(from_field);
-    to_pos = table.getPosition(to_field);
-    cout << from_field << " - " << to_field << endl;
+    Table table;
+    table.from_pos = table.getPosition(from_field);
+    table.to_pos = table.getPosition(to_field);
+    if (table.from_pos > 0 && table.to_pos > 0) {
+        table.find();
+    }
+    cout << table.getShortestPaths() << endl;
 }

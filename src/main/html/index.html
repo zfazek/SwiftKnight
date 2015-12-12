@@ -12,7 +12,7 @@
         <title>Swift Knight</title>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script>
-            var result_prefix = "Result: ";
+            var result_prefix = "Result: <p>";
 
             function submitFunction() {
                 $.ajax({
@@ -21,13 +21,14 @@
                         data:"from=" + $('#from_field').val() +
                             "&to=" + $('#to_field').val(),
                         success: function(data) {
-                            $('#result').text(result_prefix + data);
+                            $('#result').html(result_prefix + data);
                         }
                 });
             };
 
             function readyFunction() {
                 $('#submit').click(function() {
+                    $('#result').text("Searching...");
                     submitFunction();
                 });
             };
@@ -42,11 +43,11 @@
         <table>
             <tr>
                 <td align="right">From field:</td>
-                <td><input type="text" id="from_field"></td>
+                <td><input type="text" id="from_field" value="b3"></td>
             </tr>
             <tr>
                 <td align="right">To field:</td>
-                <td><input type="text" id="to_field"></td>
+                <td><input type="text" id="to_field" value="f6"></td>
             </tr>
             <tr>
                 <td align="right"><button id="submit">Calculate</button></td>
