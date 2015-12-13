@@ -11,6 +11,7 @@ using namespace cgicc;
 int main(int argc, char **argv) {
     string from_field;
     string to_field;
+
     if (argc == 3) {
         from_field = argv[1];
         to_field = argv[2];
@@ -33,8 +34,9 @@ int main(int argc, char **argv) {
     Table table;
     table.from_pos = table.getPosition(from_field);
     table.to_pos = table.getPosition(to_field);
-    if (table.from_pos > 0 && table.to_pos > 0) {
+    if (table.from_pos != INVALID_POS && table.to_pos != INVALID_POS) {
         table.find();
     }
     cout << table.getShortestPaths() << endl;
+    return 0;
 }

@@ -1,7 +1,4 @@
 #include "table.h"
-#include <iostream>
-#include <string>
-#include <stdio.h>
 
 using namespace std;
 
@@ -12,10 +9,10 @@ Table::Table() {
 Table::~Table() {}
 
 void Table::init() {
-    for (int i = 0; i < 120; i++) {
+    for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
         table[i] = new_table[i];
     }
-    number_of_moves = 64;
+    number_of_moves = NUMBER_OF_FIELDS;
     current_path.clear();
     shortest_paths.clear();
 }
@@ -27,13 +24,13 @@ void Table::search(const int pos, Path current_path) {
     }
     for (const auto dir : dir_knight) {
         int new_pos = pos + dir;
-        if (table[new_pos] == 0xff) {
+        if (table[new_pos] == BORDER) {
             continue;
         }
-        if (table[new_pos] == 1) {
+        if (table[new_pos] == VISITED) {
             continue;
         }
-        if (table[new_pos] == 2) {
+        if (table[new_pos] == TARGET) {
             current_path.push_back(new_pos);
             current_path_size = current_path.size();
             if (current_path_size < number_of_moves) {
@@ -45,10 +42,10 @@ void Table::search(const int pos, Path current_path) {
             }
             return;
         }
-        table[new_pos] = 1;
+        table[new_pos] = VISITED;
         current_path.push_back(new_pos);
         search(new_pos, current_path);
-        table[new_pos] = 0;
+        table[new_pos] = EMPTY;
         current_path.pop_back();
     }
     return;
@@ -62,29 +59,29 @@ void Table::find() {
 }
 
 void Table::move() {
-    table[from_pos] = 1;
-    table[to_pos] = 2;
+    table[from_pos] = VISITED;
+    table[to_pos] = TARGET;
 }
 
 string Table::getCoordinate(int pos) const {
-    if (pos < 0 || pos > 119) {
-        return "";
+    if (pos < 0 || pos > NUMBER_OF_FIELDS - 1) {
+        return INVALID_COORDINATE;
     }
-    if (table[pos] == 0xff) {
-        return "";
+    if (table[pos] == BORDER) {
+        return INVALID_COORDINATE;
     }
     return "" + string(1, 'a' + (pos - 1) % 10) + string(1, '0' + pos / 10 - 1);
 }
 
 int Table::getPosition(string coord) const {
     if (coord.size() != 2) {
-        return 0;
+        return INVALID_POS;
     }
     if (tolower(coord[0]) < 'a' || tolower(coord[0]) > 'h') {
-        return 0;
+        return INVALID_POS;
     }
     if (coord[1] < '1' || coord[1] > '8') {
-        return 0;
+        return INVALID_POS;
     }
     return 10 * (coord[1] - '0' + 1) + (tolower(coord[0]) - 'a' + 1);
 }
