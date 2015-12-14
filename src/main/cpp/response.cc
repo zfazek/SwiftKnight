@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
         to_field = argv[2];
     } else {
         Cgicc cgi;
-        cout << HTTPPlainHeader() << endl;
+        cout << HTTPPlainHeader();
         form_iterator p_from = cgi.getElement("from");
         form_iterator p_to = cgi.getElement("to");
         if (p_from != cgi.getElements().end() &&
