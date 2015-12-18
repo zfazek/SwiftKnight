@@ -10,50 +10,55 @@
     </style>
     <head>
         <title>Swift Knight</title>
-        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script>
-            var result_prefix = "Result: <p>";
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+                <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+                <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+                <script>
+                    var result_prefix = "Result: <p>";
 
-            function submitFunction() {
-                $.ajax({
-                        url: "/cgi-bin/response.cgi",
-                        type: "post",
-                        data:"from=" + $('#from_field').val() +
-                            "&to=" + $('#to_field').val(),
-                        success: function(data) {
-                            $('#result').html(result_prefix + data);
-                        }
-                });
-            };
+                    function submitFunction() {
+                        $.ajax({
+                                url: "/cgi-bin/response.cgi",
+                                type: "post",
+                                data:"from=" + $('#from_field').val() +
+                                    "&to=" + $('#to_field').val(),
+                                success: function(data) {
+                                    $('#result').html(result_prefix + data);
+                                }
+                        });
+                    };
 
-            function readyFunction() {
-                $('#submit').click(function() {
-                    $('#result').text("Searching...");
-                    submitFunction();
-                });
-            };
+                    function readyFunction() {
+                        $('#submit').click(function() {
+                            $('#result').text("Searching...");
+                            submitFunction();
+                        });
+                    };
 
-            $(document).ready(readyFunction);
-        </script>
-    </head>
-    <body>
-        <h1>How fast is a knight in a chess board?</h1>
-        <br>
-        <br>
-        <table>
-            <tr>
-                <td align="right">From field:</td>
-                <td><input type="text" id="from_field" value="b3"></td>
-            </tr>
-            <tr>
-                <td align="right">To field:</td>
-                <td><input type="text" id="to_field" value="f6"></td>
-            </tr>
-            <tr>
-                <td align="right"><button id="submit">Calculate</button></td>
-            </tr>
-        </table>
-        <br>
-        <div id="result">Result:</div>
-    </body>
-</html>
+                    $(document).ready(readyFunction);
+                </script>
+            </head>
+            <body>
+                <div data-role="page">
+                    <h1>How fast is a knight in a chess board?</h1>
+                    <div data-role="main" class="ui-content">
+                        <table>
+                            <tr>
+                                <td align="right">From field:</td>
+                                <td><input type="text" id="from_field" value="b3"></td>
+                            </tr>
+                            <tr>
+                                <td align="right">To field:</td>
+                                <td><input type="text" id="to_field" value="f6"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="right"><button id="submit">Calculate</button></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <div id="result">Result:</div>
+                    </div>
+                </div>
+            </body>
+        </html>
