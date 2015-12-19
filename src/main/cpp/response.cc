@@ -34,6 +34,10 @@ int main(int argc, char **argv) {
     Table table;
     table.from_pos = table.getPosition(from_field);
     table.to_pos = table.getPosition(to_field);
+    if (table.from_pos == table.to_pos) {
+        cout << from_field << " - " << to_field << endl;
+        return 0;
+    }
     if (table.from_pos != INVALID_POS && table.to_pos != INVALID_POS) {
         table.find();
     }
